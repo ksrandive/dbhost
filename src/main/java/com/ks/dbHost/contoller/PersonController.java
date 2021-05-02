@@ -1,6 +1,9 @@
-package com.ks.dbHost.service;
+package com.ks.dbHost.contoller;
 
 import com.ks.dbHost.model.Person;
+import com.ks.dbHost.model.RequestId;
+import com.ks.dbHost.service.ProcessPerson;
+import com.ks.dbHost.service.RedisPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +31,9 @@ public class PersonController {
     }
 
     @GetMapping(path= "/get")
-    public String getPerson(@RequestBody String id)
+    public String getPerson(@RequestBody RequestId requestId)
     {
-        List<String> list = redisPersonService.getFromRedis(id);
+        List<String> list = redisPersonService.getFromRedis(requestId.getId());
         return Arrays.toString(list.toArray());
     }
 }

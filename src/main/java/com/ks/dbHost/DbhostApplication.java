@@ -22,7 +22,6 @@ public class DbhostApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner (ApplicationContext context){
 		return args ->{
-//			processPerson.process();
 		};
 	}
 

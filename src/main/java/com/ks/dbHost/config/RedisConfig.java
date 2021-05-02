@@ -46,6 +46,15 @@ public class RedisConfig {
     private int personDatabase;
 
     @Bean
+    public RedisTemplate<String, Map<String, String>> userRedisTemplate() {
+        RedisTemplate<String, Map<String, String>> template = new RedisTemplate<>();
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        template.setConnectionFactory(GetLettuceConnectionFactory(redisHost, redisPort, personDatabase, redisConnectionTimeout));
+        return template;
+    }
+
+    @Bean
     public RedisTemplate<String, List<String>> personRedisTemplate() {
         RedisTemplate<String, List<String>> template = new RedisTemplate<>();
         template.setKeySerializer(new StringRedisSerializer());
